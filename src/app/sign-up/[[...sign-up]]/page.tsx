@@ -1,5 +1,11 @@
-import { SignUp } from "@clerk/nextjs";
+import { SignUp, useUser } from "@clerk/nextjs";
 
-export default function Page() {
-  return <SignUp />;
+export default function Home() {
+  const { user } = useUser();
+
+  if (!user) {
+    return <SignUp />;
+  }
+
+  return <div>Welcome!</div>;
 }
