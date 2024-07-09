@@ -6,13 +6,11 @@ import { Button } from "@/components/ui/button"
 import { useState } from "react";
 import { useRouter } from 'next/navigation';
 
-const API_URL = 'http://localhost:3000/api/convert-bookmarks';
 
 export function FileUpload() {
-
   const [selectedFile, setSelectedFile] = useState(null);
   const router = useRouter();
-  
+
   const handleFileChange = (event: any) => {
     setSelectedFile(event.target.files[0]); // Access the first selected file
   };
@@ -27,7 +25,7 @@ export function FileUpload() {
     formData.append('file', selectedFile);
 
     try {
-      const response = await fetch(API_URL, {
+      const response = await fetch('/api/convert-bookmarks', {
         method: 'POST',
         body: formData,
       });
@@ -37,9 +35,9 @@ export function FileUpload() {
         return;
       }
       const data = await response.json();
-      console.log('Upload successful:', data);
-      if (data.bookmarks) {
-        console.log('Extracted bookmarks:', data.bookmarks);
+      // console.log('Upload successful:', data);
+      if (data.length > 0) {
+        console.log('Extracted bookmarks:', data);
       }
       router.push('/bookmarks');
     } catch (error) {
