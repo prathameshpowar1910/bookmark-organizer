@@ -1,11 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
-import { collection, query, where, getDocs, DocumentData } from "firebase/firestore";
+import { collection, query, where, getDocs } from "firebase/firestore";
 import { db } from "@/firebase/config";
 import { auth } from "@clerk/nextjs/server";
 
 interface Bookmark {
   title: string;
   url: string;
+  tags: string[];
 }
 
 interface BookmarkData {

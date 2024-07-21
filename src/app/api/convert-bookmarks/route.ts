@@ -2,7 +2,8 @@ import { NextRequest, NextResponse } from "next/server";
 import cheerio, { Cheerio, Element } from "cheerio";
 import { addDoc, collection } from "firebase/firestore";
 import { db } from "@/firebase/config";
-import { auth, currentUser } from '@clerk/nextjs/server';
+import { auth } from '@clerk/nextjs/server';
+
 export interface Bookmark {
   title?: string;
   url?: string;
@@ -48,7 +49,6 @@ const convertBookmarks = async (data: string) => {
 
 export async function POST(request: NextRequest) {
   try {
-
     const { userId } = auth();
 
     if (!userId) {
